@@ -1,0 +1,217 @@
+.dropup {
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  color: rgb(109, 106, 106);
+  width: 200px;
+  height: 83px;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: 30px;
+  margin-bottom: 50px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(5%);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+}
+.dropup.open {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out,
+    width 200ms ease-in-out, height 200ms ease-in-out;
+}
+.dropup:has(.qualitymenu.open) {
+  width: 150px;
+  height: 267px;
+}
+.dropup:has(.playbackrate.open) {
+  width: 150px;
+  height: 347px;
+}
+.dropup > .main {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+}
+.dropup > .main.close {
+  display: flex;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.dropup > .main > span {
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  margin: 3px;
+  padding: 5px;
+  font-size: 13px;
+  height: 25px;
+  border: 1px solid white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.dropup > div > .title > .menu-icon {
+  height: 24px;
+  width: 24px;
+}
+.dropup > .main > span > .main-icon {
+  height: 24px;
+  width: 24px;
+}
+.dropup > .main > span:hover {
+  background-color: var(--theos-main-color);
+  color: #fff;
+  cursor: pointer;
+}
+.dropup > .main > span > span {
+  margin-left: auto;
+}
+
+.dropup > .qualitymenu {
+  position: absolute;
+  margin-left: 76px;
+  width: 100%;
+  z-index: 999;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out,
+    margin-left 200ms ease-in-out;
+}
+.dropup > .qualitymenu.open {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  opacity: 1;
+  transform: translateX(0);
+}
+.dropup > .qualitymenu > .title {
+  display: flex;
+  font-size: 12px;
+  height: 30px;
+  border-radius: 0;
+  border-bottom: 1px solid rgb(109, 106, 106);
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+.dropup > .qualitymenu > .title > p {
+  margin: 0;
+  padding: 0;
+  padding-left: 25px;
+  font-size: 13px;
+}
+.dropup > .qualitymenu > label {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  border-radius: 5px;
+  align-items: center;
+  list-style: none;
+  cursor: pointer;
+  margin: 3px;
+  padding: 5px;
+  font-size: 15px;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+.dropup > .qualitymenu > label > .checked {
+  height: 24px;
+  width: 24px;
+}
+.dropup > .qualitymenu > label > span {
+  margin-left: 10px;
+}
+.dropup > .qualitymenu > label > .quality {
+  height: 24px;
+  width: 24px;
+  margin-left: auto;
+}
+.dropup > .qualitymenu > label:hover {
+  background-color: var(--theos-main-color);
+  border-radius: 5px;
+  color: white;
+}
+.dropup > .qualitymenu > label > input[type="radio"] {
+  appearance: none;
+}
+.dropup > .playbackrate {
+  position: absolute;
+  margin-left: 100px;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out,
+    margin-left 200ms ease-in-out;
+}
+.dropup > .playbackrate.open {
+  opacity: 1;
+  transform: translateX(0);
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.dropup > .playbackrate > div {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  border-radius: 5px;
+  align-items: center;
+  list-style: none;
+  cursor: pointer;
+  margin: 3px;
+  padding: 5px;
+  font-size: 15px;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+.dropup > .playbackrate > div > span {
+  margin-left: 10px;
+}
+.dropup > .playbackrate > .pbrates:hover {
+  background-color: var(--theos-main-color);
+  border-radius: 5px;
+  color: white;
+}
+.dropup > .playbackrate > div > .checked {
+  color: rgb(109, 106, 106);
+  height: 24px;
+  width: 24px;
+}
+.dropup > .playbackrate > div:hover > .checked {
+  color: white;
+}
+.dropup > .playbackrate > .title {
+  display: flex;
+  font-size: 12px;
+  border-radius: 0;
+  height: 30px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 1px solid rgb(109, 106, 106);
+  text-align: center;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+.dropup > .playbackrate > .title > p {
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  padding-top: 2px;
+  font-size: 13px;
+}

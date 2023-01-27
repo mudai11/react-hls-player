@@ -1,0 +1,297 @@
+.player-container {
+  display: flex;
+  justify-content: center;
+  width: 1080px;
+  height: 600px;
+  position: relative;
+  margin-inline: auto;
+  --theos-main-color: #4870f5;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.player-container.full-screen {
+  max-width: initial;
+  width: 100%;
+  max-height: 100vh;
+}
+
+.player-container.full-screen .open {
+  display: none;
+}
+.player-container:not(.full-screen) .close {
+  display: none;
+}
+
+.player-container > .player-waiting {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+.player-container > .player-waiting.waiting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.player-container > .player-waiting > .loading {
+  width: 65px;
+  height: 65px;
+  border: 10px solid white;
+  border-top-color: var(--theos-main-color);
+  border-radius: 50%;
+  animation: loading 0.75s ease infinite;
+}
+.player-container > .player-play-icon {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.player-container.paused > .player-play-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+.player-container > .player-play-icon > .play {
+  display: grid;
+  place-items: center;
+  opacity: 0.85;
+  font-size: 80px;
+  color: white;
+  cursor: pointer;
+  place-items: center;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  border: none;
+  background: var(--theos-main-color);
+  animation: pulse 1.2s ease infinite;
+}
+.player-container > .player-play-icon > .play::before {
+  content: "";
+  display: inline-block;
+  border-left: 0.3em solid;
+  border-top: 0.18em solid transparent;
+  border-bottom: 0.18em solid transparent;
+  margin-right: -0.08em;
+}
+.player-container > .player-play-icon > .play:hover {
+  opacity: 1;
+}
+.player-container > video {
+  width: 100%;
+  object-fit: cover;
+}
+
+.player-container > .player-controls-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #fff;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.player-container > .player-controls-container::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
+  width: 100%;
+  aspect-ratio: 13 / 1;
+  z-index: -1;
+  pointer-events: none;
+}
+.player-container:hover > .player-controls-container,
+.player-container:focus-within > .player-controls-container,
+.player-container.paused > .player-controls-container {
+  opacity: 1;
+}
+
+.player-controls-container:has(.dropup.open) {
+  opacity: 1;
+}
+
+.player-container > .player-controls-container > .timeline-container {
+  height: 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.player-container
+  > .player-controls-container
+  > .timeline-container
+  > .timeline {
+  background-color: rgba(150, 150, 150, 0.5);
+  height: 3px;
+  width: 100%;
+  position: relative;
+}
+.player-container > .player-controls-container > .timeline-container > .buffer {
+  background-color: #fdfffc;
+  height: 3px;
+  position: absolute;
+  z-index: 2;
+}
+
+.player-container
+  > .player-controls-container
+  > .timeline-container
+  > .progress {
+  background-color: rgba(150, 150, 150, 0.5);
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  z-index: 3;
+}
+.player-container
+  > .player-controls-container
+  > .timeline-container
+  > .progress::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: calc(100% - var(--preview-position) * 100%);
+  background-color: rgb(177, 177, 177);
+  display: none;
+}
+.player-container
+  > .player-controls-container
+  > .timeline-container
+  > .progress::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: calc(100% - var(--progress-position) * 100%);
+  background-color: var(--theos-main-color);
+}
+.player-container
+  > .player-controls-container
+  > .timeline-container
+  > .thumb-indicator {
+  scale: 0;
+  position: absolute;
+  transform: translateX(calc(-12px * var(--progress-position)));
+  height: 12px;
+  left: calc(var(--progress-position) * 100%);
+  background-color: var(--theos-main-color);
+  border-radius: 50%;
+  transition: transform 80ms ease-in-out;
+  aspect-ratio: 1 / 1;
+  z-index: 3;
+}
+
+.player-container.scrubbing
+  > .player-controls-container
+  > .timeline-container
+  > .timeline::before,
+.player-container
+  > .player-controls-container
+  > .timeline-container:hover
+  > .progress::before {
+  display: block;
+}
+
+.player-container.scrubbing
+  > .player-controls-container
+  > .timeline-container
+  > .thumb-indicator,
+.player-container
+  > .player-controls-container
+  > .timeline-container:hover
+  > .thumb-indicator {
+  scale: 1;
+}
+
+.player-container.scrubbing
+  > .player-controls-container
+  > .timeline-container
+  > .timeline,
+.player-container
+  > .player-controls-container
+  > .timeline-container:hover
+  > .timeline {
+  height: 100%;
+}
+.player-container.scrubbing
+  > .player-controls-container
+  > .timeline-container
+  > .progress,
+.player-container
+  > .player-controls-container
+  > .timeline-container:hover
+  > .progress {
+  height: 7px;
+}
+.player-container.scrubbing
+  > .player-controls-container
+  > .timeline-container
+  > .buffer,
+.player-container
+  > .player-controls-container
+  > .timeline-container:hover
+  > .buffer {
+  height: 7px;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(5%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+@keyframes loading {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0em 0em 0em 0em var(--theos-main-color);
+  }
+  100% {
+    box-shadow: 0em 0em 0em 0.3em hsla(0, 0%, 0%, 0);
+  }
+}
+@media screen and (max-width: 1079px) {
+  .player-container {
+    width: 720px;
+    height: 400px;
+  }
+}
+@media screen and (max-width: 719px) {
+  .player-container {
+    width: 480px;
+    height: 270px;
+  }
+}
+@media screen and (max-width: 479px) {
+  .player-container {
+    width: 360px;
+    height: 202px;
+  }
+}
+@media screen and (max-width: 359px) {
+  .player-container {
+    width: 100%;
+    height: 100%;
+  }
+}

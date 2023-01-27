@@ -1,0 +1,201 @@
+.player-container > .player-controls-container > .controls {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  align-items: center;
+}
+.controls button {
+  display: block;
+  border: none;
+  background: none;
+  color: inherit;
+  padding: 0;
+  height: 30px;
+  width: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opaticy 150ms ease-in-out, background 150ms ease-in-out,
+    color 150ms ease-in-out;
+}
+.controls button:hover {
+  opacity: 1;
+}
+
+.player-container > .player-controls-container > .controls > .settings-btn {
+  transition: transform 500ms ease-out;
+  transform: rotate(0);
+}
+
+.player-container
+  > .player-controls-container
+  > .controls
+  > .settings-btn.active {
+  transition: transform 500ms ease-out;
+  transform: rotate(35deg);
+}
+
+.player-container.paused
+  > .player-controls-container
+  > .controls
+  > button
+  > .pause-icon {
+  display: none;
+}
+.player-container:not(.paused)
+  > .player-controls-container
+  > .controls
+  > button
+  > .play-icon {
+  display: none;
+}
+
+.player-container > .player-controls-container > .controls > .volume-container {
+  display: flex;
+  align-items: center;
+}
+
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > .volume-slider {
+  width: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: width 150ms ease-in-out, transform 150ms ease-in-out;
+}
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container:hover
+  > .volume-slider,
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > .volume-slider:focus-within {
+  width: 55px;
+  transform: scaleX(1);
+}
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > .volume-slider {
+  appearance: none;
+  height: 2px;
+  background: white;
+  cursor: pointer;
+}
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > .volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  outline: none;
+  background: white;
+  border: 1px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > .volume-slider::-moz-range-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  outline: none;
+  background: white;
+  border: 1px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > .mute-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > button
+  > .volume-high-icon,
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > button
+  > .volume-low-icon,
+.player-container
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > button
+  > .volume-muted-icon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  transition: opacity 350ms ease-in-out;
+}
+
+.player-container[data-volume-level="high"]
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > button
+  > .volume-high-icon {
+  display: block;
+  opacity: 1;
+}
+.player-container[data-volume-level="low"]
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > button
+  > .volume-low-icon {
+  display: block;
+  opacity: 1;
+}
+.player-container[data-volume-level="muted"]
+  > .player-controls-container
+  > .controls
+  > .volume-container
+  > button
+  > .volume-muted-icon {
+  display: block;
+  opacity: 1;
+}
+
+.player-container
+  > .player-controls-container
+  > .controls
+  > .duration-container {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  gap: 0.25rem;
+  flex-grow: 1;
+}
+.player-container
+  > .player-controls-container
+  > .controls
+  > .duration-container
+  > .video-title {
+  margin-left: 5px;
+}
+
+.player-container > .player-controls-container > .controls > button .wide-btn {
+  width: 50px;
+}
